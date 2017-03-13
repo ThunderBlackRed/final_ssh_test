@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.test.beans">
+	<class name="Person" table="person">
+		<id name="per_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="per_no" column="per_no" />
+		<property name="per_name" column="per_name" />
+		<property name="per_post" column="per_post" />
+		<property name="per_admin" column="per_admin" />
+		<property name="per_pwd" column="per_pwd" />
+		<property name="de_id" column="de_id" />
+		<property name="de_name" column="de_name" />
+		<property name="per_phone" column="per_phone" />
+		<property name="per_sex" column="per_sex" />
+	</class>
+</hibernate-mapping>  

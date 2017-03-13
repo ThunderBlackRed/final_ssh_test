@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+
+	<package name="test_final" extends="struts-default">
+
+		<action name="Gonggao*" class="announcementAction" method="{1}">
+			<result name="success">/LW_CheckWork/messages/lw_gonggao.jsp</result>
+			<result name="upload">/LW_CheckWork/messages/upload.jsp</result>
+			<result name="history">/LW_CheckWork/user/lw_user_historyMessage.jsp
+			</result>
+			<result name="historyHoutai">/LW_CheckWork/messages/lw_historyGonggao.jsp
+			</result>
+			<result name="updateRe">/LW_CheckWork/messages/re.jsp</result>
+		</action>
+
+		<action name="DayCheck*" class="dayCheckAction" method="{1}"></action>
+
+		<action name="department*" class="departmentAction" method="{1}">
+			<result name="success">/LW_CheckWork/department/lw_departmentPage.jsp
+			</result>
+			<result name="findAll">/LW_CheckWork/department/lw_De_findAllDo.jsp
+			</result>
+			<result name="findById">/LW_CheckWork/department/lw_De_updateDo.jsp
+			</result>
+			<result name="insert">/LW_CheckWork/department/lw_De_insertDo.jsp
+			</result>
+			<result name="input">/LW_CheckWork/lw_login_fail.jsp</result>
+			<result name="updateRe">/LW_CheckWork/department/re.jsp</result>
+			<result name="failure">/LW_CheckWork/lw_login_fail.jsp</result>
+		</action>
+
+		<action name="MC*" class="monthCheckAction" method="{1}">
+			<result name="success">/LW_CheckWork/monthCheck/lw_monthCheckPage.jsp
+			</result>
+			<result name="findAll">/LW_CheckWork/monthCheck/lw_MC_findAllDo.jsp
+			</result>
+			<result name="findById">/LW_CheckWork/monthCheck/lw_MC_updateDo.jsp
+			</result>
+			<result name="insert">/LW_CheckWork/monthCheck/lw_MC_insertDo.jsp
+			</result>
+			<result name="input">/LW_CheckWork/lw_login_fail.jsp</result>
+			<result name="excel">/LW_CheckWork/monthCheck/Excel.jsp</result>
+			<result name="updateRe">/LW_CheckWork/monthCheck/re.jsp</result>
+			<result name="failure">/LW_CheckWork/lw_login_fail.jsp</result>
+		</action>
+
+		<action name="Person*" class="personAction" method="{1}">
+			<result name="adminPage">/LW_CheckWork/index.jsp</result>
+			<result name="userPage">/LW_CheckWork/lw_login_user.jsp</result>
+			<result name="err">/LW_CheckWork/lw_login_fail.jsp</result>
+			<result name="success">/LW_CheckWork/person/lw_personPage.jsp</result>
+			<result name="findAll">/LW_CheckWork/person/lw_person_findAllDo.jsp
+			</result>
+			<result name="findById">/LW_CheckWork/person/lw_person_updateDo.jsp
+			</result>
+			<result name="insert">/LW_CheckWork/person/lw_person_insertDo.jsp
+			</result>
+			<result name="input">/LW_CheckWork/lw_login_fail.jsp</result>
+			<result name="updateRe">/LW_CheckWork/person/re.jsp</result>
+			<result name="failure">/LW_CheckWork/lw_login_fail.jsp</result>
+		</action>
+		
+		<action name="Thing*" class="thingAction" method="{1}">
+			<result name="success">/LW_CheckWork/thing/lw_thingPage.jsp</result>
+			<result name="findAll">/LW_CheckWork/thing/lw_Th_findAllDo.jsp</result>
+			<result name="findById">/LW_CheckWork/thing/lw_Th_updateDo.jsp</result>
+			<result name="insert">/LW_CheckWork/thing/lw_Th_insertDo.jsp</result>
+			<result name="input">/LW_CheckWork/lw_login_fail.jsp</result>
+			<result name="updateRe">/LW_CheckWork/thing/re.jsp</result>
+			<result name="failure">/LW_CheckWork/lw_login_fail.jsp</result>
+		</action>
+
+		<action name="People*" class="com.lw.struts.userAction.indexUserAction"
+			method="{1}">
+			<result name="first">/LW_CheckWork/lw_login_user.jsp</result>
+			<result name="qing">/LW_CheckWork/user/lw_user_qingjia.jsp</result>
+			<result name="qian">/LW_CheckWork/user/lw_user_sign_in.jsp</result>
+			<result name="findById">/LW_CheckWork/user/lw_user_personMessages.jsp
+			</result>
+			<result name="personMessages">/LW_CheckWork/user/lw_user_personMessages.jsp
+			</result>
+			<result name="messages">/LW_CheckWork/lw_user_messages.jsp</result>
+			<result name="updateRe">/LW_CheckWork/user/re.jsp</result>
+			<result name="SignIn">/LW_CheckWork/user/re.jsp</result>
+			<result name="findThing">/LW_CheckWork/user/lw_user_findThing.jsp
+			</result>
+			<result name="findCheck">/LW_CheckWork/user/lw_user_findCheck.jsp
+			</result>
+			<result name="findCheckHoutai">/LW_CheckWork/daycheck/lw_daycheckPage.jsp
+			</result>
+		</action>
+
+
+	</package>
+</struts>

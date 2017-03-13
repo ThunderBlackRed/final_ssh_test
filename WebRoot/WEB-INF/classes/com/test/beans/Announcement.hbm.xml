@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >  
+    
+<hibernate-mapping package="com.test.beans">  
+    <class name="Announcement" table="announcement">  
+        <id name="an_id" column="an_id">  
+            <generator class="native"></generator>  
+        </id>  
+        <property name="an_th" column="an_th" type="java.lang.String"  
+            not-null="true" length="50"></property>  
+        <property name="an_messages" column="an_messages" type="java.lang.String"  
+            not-null="true" length="255" />  
+        <property name="an_date" column="an_date" type="java.util.Date" />  
+    </class>  
+</hibernate-mapping>  

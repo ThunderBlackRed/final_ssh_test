@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           ">
+
+	<!--引入注解配置 设置扫描类 包含struts2 spring -->
+	<context:annotation-config />
+	<!--包括<context:annotation-config/>，可代替 -->
+	<context:component-scan base-package="com.wonders" />
+	<context:component-scan base-package="com.xmm" />
+	<!-- 定义数据源的信息 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost:3306/lw_checkwork</value>
+		</property>
+		<property name="user">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>80</value>
+		</property>
+		<property name="minPoolSize">
+			<value>10</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>5</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>0</value>
+		</property>
+	</bean>
+
+	<!--定义Hibernate的SessionFactory -->
+	<!-- SessionFactory使用的数据源为上面的数据源 -->
+	<!-- 指定了Hibernate的映射文件和配置信息 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/test/beans/Announcement.hbm.xml</value>
+				<value>com/test/beans/DayCheck.hbm.xml</value>
+				<value>com/test/beans/Department.hbm.xml</value>
+				<value>com/test/beans/MonthCheck.hbm.xml</value>
+				<value>com/test/beans/Person.hbm.xml</value>
+				<value>com/test/beans/Thing.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">30</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 配置hibernate操作类 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置hibernate事务管理类 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="personDao" class="com.test.daoImpl.PersonDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="announcementDao" class="com.test.daoImpl.AnnouncementDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="dayCheckDao" class="com.test.daoImpl.DayCheckDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="departmentDao" class="com.test.daoImpl.DepartmentDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="monthCheckDao" class="com.test.daoImpl.MonthCheckDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="thingDao" class="com.test.daoImpl.ThingDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 登陆业务逻辑类 -->
+	<bean id="personManager" class="com.test.serviceImpl.PersonManagerImpl">
+		<property name="dao">
+			<ref bean="personDao" />
+		</property>
+	</bean>
+
+	<bean id="announcementManager" class="com.test.serviceImpl.AnnouncementManagerImpl">
+		<property name="dao">
+			<ref bean="announcementDao" />
+		</property>
+	</bean>
+
+	<bean id="dayCheckManager" class="com.test.serviceImpl.DayCheckManagerImpl">
+		<property name="dao">
+			<ref bean="dayCheckDao" />
+		</property>
+	</bean>
+
+	<bean id="departmentManager" class="com.test.serviceImpl.DepartmentManagerImpl">
+		<property name="dao">
+			<ref bean="departmentDao" />
+		</property>
+	</bean>
+
+	<bean id="monthCheckManager" class="com.test.serviceImpl.MonthCheckManagerImpl">
+		<property name="dao">
+			<ref bean="monthCheckDao" />
+		</property>
+	</bean>
+
+	<bean id="thingManager" class="com.test.serviceImpl.ThingManagerImpl">
+		<property name="dao">
+			<ref bean="thingDao" />
+		</property>
+	</bean>
+
+	<!-- 用户登录的Action -->
+	<bean id="personAction" class="com.test.action.PersonAction">
+		<property name="personManager">
+			<ref bean="personManager" />
+		</property>
+	</bean>
+
+	<bean id="announcementAction" class="com.test.action.AnnouncementAction">
+		<property name="announcementManager">
+			<ref bean="announcementManager" />
+		</property>
+	</bean>
+
+	<bean id="dayCheckAction" class="com.test.action.DayCheckAction">
+		<property name="dayCheckManager">
+			<ref bean="dayCheckManager" />
+		</property>
+	</bean>
+
+	<bean id="departmentAction" class="com.test.action.DepartmentAction">
+		<property name="departmentManager">
+			<ref bean="departmentManager" />
+		</property>
+	</bean>
+
+	<bean id="monthCheckAction" class="com.test.action.MonthCheckAction">
+		<property name="monthCheckManager">
+			<ref bean="monthCheckManager" />
+		</property>
+	</bean>
+
+	<bean id="thingAction" class="com.test.action.ThingAction">
+		<property name="thingManager">
+			<ref bean="thingManager" />
+		</property>
+	</bean>
+</beans>  
